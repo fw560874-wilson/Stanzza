@@ -5,7 +5,7 @@ import { useUi } from "../context/UiContext";
 import { CallIcon } from "./CallIcon";
 
 export function MenuOverlay() {
-  const { menuOpen, setMenuOpen, setInquiryOpen } = useUi();
+  const { menuOpen, setMenuOpen } = useUi();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
