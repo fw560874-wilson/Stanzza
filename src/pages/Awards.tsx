@@ -6,7 +6,7 @@ export function Awards() {
   const { setInquiryOpen } = useUi();
 
   return (
-    <main>
+    <main id="main">
       <section className="hero" id="hero">
         <div className="hero-media">
           <img src={images.hero} alt="Stanzza interior composed for award submission" />

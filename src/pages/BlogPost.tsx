@@ -11,7 +11,7 @@ export function BlogPost() {
   const next = articles[index + 1];
 
   return (
-    <main>
+    <main id="main">
       <article className="container page-hero">
         <Link to="/blog" className="kicker">
           ← Blog

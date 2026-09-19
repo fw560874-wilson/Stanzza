@@ -6,6 +6,7 @@ import { MenuOverlay } from "./components/MenuOverlay";
 import { SearchOverlay } from "./components/SearchOverlay";
 import { InquiryModal } from "./components/InquiryModal";
 import { CookieBanner } from "./components/CookieBanner";
+import { ScrollControl } from "./components/ScrollControl";
 import { useScrollMotion } from "./hooks/useScrollMotion";
 import { Home } from "./pages/Home";
 import { Projects } from "./pages/Projects";
@@ -46,7 +47,11 @@ export default function App() {
 
   return (
     <div className="page">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <div className="scroll-line" />
+      <ScrollControl />
       <ScrollManager />
       <Header />
       <MenuOverlay />

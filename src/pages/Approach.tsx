@@ -2,7 +2,7 @@ import { delivery, images, pillars } from "../data/content";
 
 export function Approach() {
   return (
-    <main>
+    <main id="main">
       <section className="container page-hero">
         <p className="kicker">Approach</p>
         <h1 className="serif">How a home stays composed.</h1>
@@ -19,7 +19,7 @@ export function Approach() {
       <section className="band">
         <div className="container">
           <h2 className="serif">Three layers, one interior.</h2>
-          <div className="grid-4" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+          <div className="grid-3">
             {pillars.map((item) => (
               <article className="card" key={item.n}>
                 <p className="n">{item.n}</p>

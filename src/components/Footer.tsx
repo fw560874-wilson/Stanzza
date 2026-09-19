@@ -32,14 +32,14 @@ export function Footer() {
         </div>
       </div>
       <footer className="container footer">
-        <p>© Stanzza design Europe 2026</p>
+        <p>© Stanzza Design Europe 2026</p>
         <nav>
           <Link to="/#composition">About</Link>
           <Link to="/projects">Projects</Link>
           <Link to="/approach">Approach</Link>
           <Link to="/awards">Awards</Link>
           <Link to="/blog">Blog</Link>
-          <Link to="/contact">Contacts</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
         <div className="footer-links">
           <a href={studio.socials.linkedin} target="_blank" rel="noreferrer">
@@ -56,7 +56,7 @@ export function Footer() {
           </a>
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/terms">Terms of Service</Link>
-          <Link to="/cookies">Cookies Settings</Link>
+          <Link to="/cookies">Cookie settings</Link>
         </div>
       </footer>
     </section>

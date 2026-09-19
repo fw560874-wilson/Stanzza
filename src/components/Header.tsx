@@ -1,5 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
-import { nav } from "../data/content";
+import { Link } from "react-router-dom";
 import { useUi } from "../context/UiContext";
 import { Logo } from "./Logo";
 import { CallIcon } from "./CallIcon";
@@ -14,14 +13,6 @@ export function Header() {
           <Logo />
           <span>Stanzza</span>
         </Link>
-
-        <nav className="nav-links" aria-label="Primary">
-          {nav.map((item) => (
-            <NavLink key={item.to} to={item.to} className={({ isActive }) => (isActive ? "active" : undefined)}>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
 
         <div className="nav-actions">
           <button className="search-btn" onClick={() => setSearchOpen(true)} aria-label="Search the site">

@@ -11,17 +11,27 @@ export function SearchOverlay() {
   const hits = useMemo(() => searchSite(query), [query]);
 
   useEffect(() => {
-    if (searchOpen) {
-      setQuery("");
-      requestAnimationFrame(() => inputRef.current?.focus());
-    }
-  }, [searchOpen]);
-
-  if (!searchOpen) return null;
+    if (!searchOpen) return;
+    setQuery("");
+    requestAnimationFrame(() => inputRef.current?.focus());
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSearchOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [searchOpen, setSearchOpen]);
 
   return (
-    <div className="search-back" onClick={() => setSearchOpen(false)}>
-      <div className="search-panel" onClick={(event) => event.stopPropagation()}>
+    <div
+      className={searchOpen ? "search-back open" : "search-back"}
+      onClick={() => setSearchOpen(false)}
+      aria-hidden={!searchOpen}
+    >
+      <div className="search-panel" role="dialog" aria-modal="true" aria-label="Site search" onClick={(event) => event.stopPropagation()}>
         <div className="search-field">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <circle cx="8" cy="8" r="5.4" stroke="currentColor" strokeWidth="1.6" />
@@ -32,6 +42,7 @@ export function SearchOverlay() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search pages, projects, articles"
+            aria-label="Search pages, projects and articles"
           />
           <button onClick={() => setSearchOpen(false)} aria-label="Close search">
             Esc

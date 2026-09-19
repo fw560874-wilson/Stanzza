@@ -3,7 +3,7 @@ import { InquiryForm } from "../components/InquiryForm";
 
 export function Contact() {
   return (
-    <main>
+    <main id="main">
       <section className="container page-hero">
         <p className="kicker">Contact</p>
         <h1 className="serif">Start with a conversation.</h1>

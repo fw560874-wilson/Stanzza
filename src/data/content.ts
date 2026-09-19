@@ -38,7 +38,7 @@ export const studio = {
   email: "kirill@stanzza.design",
   phone: "+34 654 496 780",
   phoneHref: "tel:+34654496780",
-  address: "Carrer Ausias Marc 13, 08010, Barcelona",
+  address: "Carrer d'Ausiàs March 13, 08010 Barcelona",
   maps: "https://maps.app.goo.gl/TGYpnaESmci1h4PS8",
   socials: {
     instagram: "https://www.instagram.com/stanzza_design",
@@ -230,7 +230,7 @@ export const articles: Article[] = [
     date: "11 Jan 2026",
     read: "5 min read",
     image: images.blogAtelier,
-    author: "Kirill, CEO & FOUNDER",
+    author: "Kirill, CEO & Founder",
     body: [
       {
         paragraphs: [
@@ -291,7 +291,7 @@ export const articles: Article[] = [
     date: "11 Jan 2026",
     read: "6 min read",
     image: images.blogPavilion,
-    author: "Kirill, CEO & FOUNDER",
+    author: "Kirill, CEO & Founder",
     body: [
       {
         paragraphs: [
@@ -339,7 +339,7 @@ export const articles: Article[] = [
     date: "8 Jan 2026",
     read: "4 min read",
     image: images.blogCotton,
-    author: "Kirill, CEO & FOUNDER",
+    author: "Kirill, CEO & Founder",
     body: [
       {
         paragraphs: [
@@ -465,7 +465,7 @@ export const clients = [
   "Elis",
   "Kaldi",
   "Baron",
-  "Everyuay",
+  "Everyway",
 ];
 
 export const awards = [

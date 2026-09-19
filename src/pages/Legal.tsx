@@ -19,7 +19,7 @@ const copy: Record<LegalKind, { title: string; body: string[] }> = {
     ],
   },
   cookies: {
-    title: "Cookies Settings",
+    title: "Cookie settings",
     body: [
       "Essential cookies remember that you have accepted this notice.",
       "If you previously accepted cookies, you can clear site data in your browser to reset the choice.",
@@ -31,7 +31,7 @@ const copy: Record<LegalKind, { title: string; body: string[] }> = {
 export function Legal({ kind }: { kind: LegalKind }) {
   const page = copy[kind];
   return (
-    <main>
+    <main id="main">
       <section className="container page-hero prose" style={{ paddingBottom: 80 }}>
         <h1 className="serif">{page.title}</h1>
         {page.body.map((p) => (

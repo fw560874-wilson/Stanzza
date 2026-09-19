@@ -3,7 +3,7 @@ import { projects } from "../data/content";
 
 export function Projects() {
   return (
-    <main>
+    <main id="main">
       <section className="container page-hero">
         <Link to="/" className="kicker">
           ← Home

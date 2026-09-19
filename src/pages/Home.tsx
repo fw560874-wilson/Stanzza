@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   articles,
@@ -18,10 +18,57 @@ export function Home() {
   const { setInquiryOpen } = useUi();
   const [active, setActive] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const cardRef = useRef<HTMLElement>(null);
   const project = projects[active];
 
+  const showProject = (index: number) => {
+    const total = projects.length;
+    setActive(((index % total) + total) % total);
+  };
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    let startX: number | null = null;
+
+    const ignored = (target: EventTarget | null) =>
+      target instanceof HTMLElement && Boolean(target.closest("a, button"));
+
+    const onDown = (event: PointerEvent) => {
+      if (ignored(event.target)) return;
+      startX = event.clientX;
+      try {
+        card.setPointerCapture(event.pointerId);
+      } catch {
+        /* ignore when the pointer is not captured, for example in tests */
+      }
+    };
+    const onUp = (event: PointerEvent) => {
+      if (startX == null) return;
+      const delta = event.clientX - startX;
+      startX = null;
+      if (Math.abs(delta) < 40) return;
+      setActive((index) => {
+        const total = projects.length;
+        return delta > 0 ? (index + 1) % total : (index - 1 + total) % total;
+      });
+    };
+    const onCancel = () => {
+      startX = null;
+    };
+
+    card.addEventListener("pointerdown", onDown);
+    card.addEventListener("pointerup", onUp);
+    card.addEventListener("pointercancel", onCancel);
+    return () => {
+      card.removeEventListener("pointerdown", onDown);
+      card.removeEventListener("pointerup", onUp);
+      card.removeEventListener("pointercancel", onCancel);
+    };
+  }, []);
+
   return (
-    <main className="snap-page">
+    <main className="snap-page" id="main">
       <section className="hero snap-section" id="hero">
         <div className="hero-media">
           <img src={images.hero} alt="" />
@@ -89,7 +136,7 @@ export function Home() {
       </section>
 
       <section className="featured snap-section" data-reveal>
-        <article className="featured-card" style={{ background: project.accent }}>
+        <article ref={cardRef} className="featured-card" style={{ background: project.accent }}>
           <img src={project.image} alt={project.title} />
           <div className="featured-copy">
             <p className="kicker" style={{ color: "rgba(255,255,255,.8)" }}>
@@ -129,7 +176,7 @@ export function Home() {
             <button
               key={item.slug}
               className={index === active ? "active" : ""}
-              onClick={() => setActive(index)}
+              onClick={() => showProject(index)}
               aria-label={`Show ${item.title}`}
             />
           ))}
@@ -170,7 +217,7 @@ export function Home() {
             <br />
             Premium delivery.
           </h2>
-          <div className="grid-4" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+          <div className="grid-3">
             {pillars.map((item) => (
               <article className="card" key={item.n}>
                 <p className="n">{item.n}</p>
@@ -252,7 +299,7 @@ export function Home() {
       </section>
 
       <section className="quote container">
-        <blockquote className="serif">“Good design feels inevitable. Nothing extra, nothing missing”</blockquote>
+        <blockquote className="serif">“Good design feels inevitable. Nothing extra, nothing missing.”</blockquote>
         <p>Kirill · CEO & Founder</p>
       </section>
 

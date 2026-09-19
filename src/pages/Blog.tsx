@@ -3,7 +3,7 @@ import { articles } from "../data/content";
 
 export function Blog() {
   return (
-    <main>
+    <main id="main">
       <section className="container page-hero">
         <p className="kicker">From the studio</p>
         <h1 className="serif">Blog.</h1>

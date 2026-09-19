@@ -8,7 +8,7 @@ export function ProjectDetail() {
   if (!project) return <NotFound />;
 
   return (
-    <main>
+    <main id="main">
       <section className="container detail-hero">
         <Link to="/projects" className="kicker">
           ← Projects

@@ -10,10 +10,15 @@ export function MenuOverlay() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    if (menuOpen) window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
-  }, [menuOpen]);
+  }, [menuOpen, setMenuOpen]);
 
   return (
     <div className={menuOpen ? "menu open" : "menu"} role="dialog" aria-modal="true" aria-hidden={!menuOpen}>
