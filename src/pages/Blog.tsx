@@ -1,29 +1,33 @@
 import { Link } from "react-router-dom";
-import { articles } from "../data/content";
+import { articles, interiors } from "../data/content";
+import { ImageReel } from "../components/ImageReel";
+import { InteriorGallery } from "../components/InteriorGallery";
 
 export function Blog() {
   return (
     <main id="main">
-      <section className="container page-hero">
-        <p className="kicker">From the studio</p>
-        <h1 className="serif">Blog.</h1>
-        <p className="lead" style={{ marginTop: 16, maxWidth: 560 }}>
-          Notes on rooms, cities and the interiors we keep returning to.
-        </p>
-        <div className="blog-grid" style={{ marginTop: 48 }}>
+      <section className="container page-hero blog-index">
+        <Link to="/" className="page-crumb">
+          ← Home
+        </Link>
+        <div className="blog-head">
+          <h1 className="serif">Blog.</h1>
+          <p className="blog-count">+{String(articles.length).padStart(2, "0")}</p>
+        </div>
+        <ImageReel shots={interiors.blog.slice(0, 8)} />
+        <div className="blog-list">
           {articles.map((article) => (
-            <Link className="blog-card" to={`/blog/${article.slug}`} key={article.slug}>
-              <img src={article.image} alt={article.title} />
-              <div>
-                <p className="kicker">
-                  {article.date} · {article.read}
-                </p>
-                <h3 className="serif">{article.title}</h3>
-                <p style={{ color: "var(--muted)" }}>{article.excerpt}</p>
-              </div>
+            <Link className="blog-row" to={`/blog/${article.slug}`} key={article.slug}>
+              <figure className="blog-shot">
+                <img src={article.image} alt={article.title} />
+                <span className="blog-view">View</span>
+              </figure>
+              <h2 className="serif">{article.title}</h2>
+              <span className="blog-row-link">View article</span>
             </Link>
           ))}
         </div>
+        <InteriorGallery shots={interiors.blog} title="From the rooms" />
       </section>
     </main>
   );

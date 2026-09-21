@@ -1,5 +1,8 @@
+import { type CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { projects } from "../data/content";
+import { interiors, projects } from "../data/content";
+import { ImageReel } from "../components/ImageReel";
+import { InteriorGallery } from "../components/InteriorGallery";
 
 export function Projects() {
   return (
@@ -12,8 +15,9 @@ export function Projects() {
           <h1 className="serif">Projects</h1>
           <p className="count">+{projects.length}</p>
         </div>
+        <ImageReel shots={interiors.projects.slice(0, 8)} />
       </section>
-      {projects.map((project) => (
+      {projects.map((project, index) => (
         <article className="container project-row" key={project.slug}>
           <div className="project-meta">
             <p>{project.date}</p>
@@ -34,9 +38,14 @@ export function Projects() {
               View details
             </Link>
           </div>
-          <img src={project.image} alt={project.title} />
+          <figure className="anim-shot" style={{ "--shot-delay": `${0.08 + index * 0.04}s` } as CSSProperties}>
+            <img src={project.image} alt={project.title} />
+          </figure>
         </article>
       ))}
+      <section className="container" style={{ paddingBottom: 80 }}>
+        <InteriorGallery shots={interiors.projects} title="Selected rooms" />
+      </section>
     </main>
   );
 }

@@ -1,5 +1,7 @@
 import { Link, useParams } from "react-router-dom";
-import { projects } from "../data/content";
+import { interiors, projects } from "../data/content";
+import { InteriorGallery } from "../components/InteriorGallery";
+import { ImageReel } from "../components/ImageReel";
 import { NotFound } from "./NotFound";
 
 export function ProjectDetail() {
@@ -32,7 +34,7 @@ export function ProjectDetail() {
             <strong>In {project.days} days</strong>
           </div>
         </div>
-        <img src={project.image} alt={project.title} style={{ width: "100%", borderRadius: 32, maxHeight: 680, objectFit: "cover" }} />
+        <ImageReel shots={project.gallery.map((src) => ({ src, alt: project.title }))} />
       </section>
       <section className="container prose" style={{ paddingBottom: 40 }}>
         <h3 className="serif">Client</h3>
@@ -50,8 +52,13 @@ export function ProjectDetail() {
       </section>
       <section className="container gallery-stack">
         {project.gallery.map((src) => (
-          <img key={src} src={src} alt={project.title} />
+          <figure className="anim-shot" key={src}>
+            <img src={src} alt={project.title} />
+          </figure>
         ))}
+      </section>
+      <section className="container" style={{ paddingBottom: 80 }}>
+        <InteriorGallery shots={interiors.projects} title="More rooms" />
       </section>
     </main>
   );

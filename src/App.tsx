@@ -14,6 +14,7 @@ import { ProjectDetail } from "./pages/ProjectDetail";
 import { Blog } from "./pages/Blog";
 import { BlogPost } from "./pages/BlogPost";
 import { Approach } from "./pages/Approach";
+import { Awards } from "./pages/Awards";
 import { Contact } from "./pages/Contact";
 import { Legal } from "./pages/Legal";
 import { NotFound } from "./pages/NotFound";
@@ -24,10 +25,16 @@ function ScrollManager() {
   useEffect(() => {
     if (hash) {
       const id = hash.replace("#", "");
-      requestAnimationFrame(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      });
-      return;
+      const scroll = () => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "instant", block: "start" });
+      };
+      scroll();
+      const frame = window.requestAnimationFrame(scroll);
+      const timer = window.setTimeout(scroll, 80);
+      return () => {
+        window.cancelAnimationFrame(frame);
+        window.clearTimeout(timer);
+      };
     }
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname, hash]);
@@ -60,7 +67,7 @@ export default function App() {
       <CookieBanner />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/awards" element={<Home />} />
+        <Route path="/awards" element={<Awards />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/blog" element={<Blog />} />

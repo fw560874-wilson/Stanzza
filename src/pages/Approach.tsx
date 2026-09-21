@@ -1,4 +1,6 @@
-import { delivery, images, pillars } from "../data/content";
+import { delivery, interiors, pillars } from "../data/content";
+import { ImageReel } from "../components/ImageReel";
+import { InteriorGallery } from "../components/InteriorGallery";
 
 export function Approach() {
   return (
@@ -10,11 +12,10 @@ export function Approach() {
           Architecture, design and delivery move as one process. Nothing is handed off, and nothing moves forward
           without your approval.
         </p>
+        <ImageReel shots={interiors.approach.slice(0, 8)} />
       </section>
-      <section className="container gallery" style={{ marginBottom: 64 }}>
-        <img src={images.approachOne} alt="Approach — architecture" />
-        <img src={images.approachFour} alt="Approach — design" />
-        <img src={images.approachFive} alt="Approach — delivery" />
+      <section className="container" style={{ marginBottom: 64 }}>
+        <InteriorGallery shots={interiors.approach} title="Process rooms" />
       </section>
       <section className="band">
         <div className="container">

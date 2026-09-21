@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   articles,
   clients,
   delivery,
   faqs,
   images,
+  interiors,
   pillars,
   projects,
   stats,
@@ -13,9 +14,12 @@ import {
 } from "../data/content";
 import { useUi } from "../context/UiContext";
 import { CallIcon } from "../components/CallIcon";
+import { ImageReel } from "../components/ImageReel";
+import { InteriorGallery } from "../components/InteriorGallery";
 
 export function Home() {
   const { setInquiryOpen } = useUi();
+  const { pathname, hash } = useLocation();
   const [active, setActive] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const cardRef = useRef<HTMLElement>(null);
@@ -88,9 +92,9 @@ export function Home() {
         </button>
       </section>
 
-      <section className="composition snap-section" id="composition" data-reveal>
+      <section className="composition snap-section" id="composition">
         <div className="container composition-grid">
-          <div className="composition-copy">
+          <div className="composition-copy" data-reveal>
             <p className="kicker">01 · Studio</p>
             <h2 className="serif">A home is a composition.</h2>
             <p className="lead">
@@ -116,28 +120,32 @@ export function Home() {
               </li>
             </ul>
           </div>
-          <div className="composition-media">
-            <figure>
+          <div className="composition-media" key={`${pathname}${hash}`}>
+            <figure className="anim-shot" style={{ "--shot-delay": "0.05s" } as CSSProperties}>
               <img src={images.pauDetail} alt="Pau Claris living room" />
               <figcaption>Pau Claris · Barcelona</figcaption>
             </figure>
             <div className="composition-stack">
-              <figure>
+              <figure className="anim-shot" style={{ "--shot-delay": "0.14s" } as CSSProperties}>
                 <img src={images.valencia} alt="Valencia apartment seating" />
                 <figcaption>Valencia apartment</figcaption>
               </figure>
-              <figure>
+              <figure className="anim-shot" style={{ "--shot-delay": "0.22s" } as CSSProperties}>
                 <img src={images.chok} alt="Cafe Chok facade" />
                 <figcaption>Cafe Chok · Riyadh</figcaption>
               </figure>
             </div>
           </div>
         </div>
+        <div className="container" style={{ marginTop: 48 }}>
+          <ImageReel shots={interiors.about.slice(0, 8)} />
+          <InteriorGallery shots={interiors.about} title="Rooms" />
+        </div>
       </section>
 
       <section className="featured snap-section" data-reveal>
         <article ref={cardRef} className="featured-card" style={{ background: project.accent }}>
-          <img src={project.image} alt={project.title} />
+          <img key={project.slug} src={project.image} alt={project.title} />
           <div className="featured-copy">
             <p className="kicker" style={{ color: "rgba(255,255,255,.8)" }}>
               In years

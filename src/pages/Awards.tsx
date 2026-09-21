@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import { awards, images, stats } from "../data/content";
+import { awards, images, interiors, stats } from "../data/content";
+import { ImageReel } from "../components/ImageReel";
+import { InteriorGallery } from "../components/InteriorGallery";
 import { useUi } from "../context/UiContext";
 
 export function Awards() {
@@ -9,7 +11,7 @@ export function Awards() {
     <main id="main">
       <section className="hero" id="hero">
         <div className="hero-media">
-          <img src={images.hero} alt="Stanzza interior composed for award submission" />
+          <ImageReel shots={interiors.awards.slice(0, 8)} variant="hero" />
           <div className="hero-shade" />
         </div>
         <div className="hero-copy reveal">
@@ -37,6 +39,7 @@ export function Awards() {
               10 years in Spain, and interiors delivered in Barcelona and Riyadh.
             </p>
           </div>
+          <InteriorGallery shots={interiors.awards} title="Recognised rooms" />
           <div className="award-grid">
             {awards.map((item) => (
               <article className="award-card" key={item.title}>
@@ -53,7 +56,7 @@ export function Awards() {
 
       <section className="featured">
         <article className="featured-card" style={{ background: "#7A8452" }}>
-          <img src={images.pau} alt="Pau Claris Apartment" />
+          <img key="awards-featured" src={images.pau} alt="Pau Claris Apartment" />
           <div className="featured-copy">
             <p className="kicker" style={{ color: "rgba(255,255,255,.8)" }}>
               Selected work
